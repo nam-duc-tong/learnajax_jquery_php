@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <h2>Them du lieu</h2>
+    <input type="text" id="name" placeholder="Name">
+    <button id="add_btn">Add</button>
+
+    <h2>Sua du lieu</h2>
+    <input type="text" id="edit_id" placeholder="ID">
+    <input type="text" id="new_name" placeholder="New Name">
+    <button id="edit_btn">Edit</button>
+
+    <h2>Xoa du lieu</h2>
+    <input type="text" id="delete_id" placeholder="ID">
+    <button id="delete_btn">Xoa</button>
+
+    <script>
+        $(document).ready(function () {
+            // them du lieu
+            $("#add_btn").click(function () {
+                var addname = $("#name").val();
+                $.ajax({
+                    url: "add.php",
+                    type: "POST",
+                    data: {name: addname},
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+            });
+            // Sua du lieu
+            $("#edit_btn").click(function(){
+                var id = $("#edit_id").val();
+                var newName = $("#new_name").val();
+                $.ajax({
+                    url: "edit.php",
+                    type: "POST",
+                    data: {id: id,name: newName},
+                    success: function(data){
+                        alert(data);
+                    }
+                });
+            });
+            // xoa du lieu
+            $("#delete_btn").click(function(){
+                var id = $("#delete_id").val();
+                $.ajax({
+                    url: "delete.php",
+                    type: "POST",
+                    data: {id: id},
+                    success: function(data){
+                        alert(data);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
